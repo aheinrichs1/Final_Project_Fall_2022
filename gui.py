@@ -83,7 +83,6 @@ def check_game_status(condition):
         for letter in newGame.answer:
             answer += letter + ' '
         hidden_answer.config(text=answer)
-        print(newGame.answer)
         end_game()
 
 
