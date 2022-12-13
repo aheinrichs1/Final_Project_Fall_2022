@@ -1,3 +1,10 @@
+"""
+Program: hangman.py
+Author: Alex Heinrichs
+Date Modified: 12/13/2022
+
+Contains a class Hangman that works with a GUI to provide a working hangman game
+"""
 import tkinter as tk
 import random
 import csv
@@ -9,8 +16,12 @@ class Hangman:
         """sets a wordlist, string answer,
         default int misses_remaining, and empty list guessed_letters"""
         # reads a list of words from a csv file
-        with open('Hangman_wordbank.csv') as csv_file:
-            self.wordlist = csv.reader(csv_file, delimiter=',').__next__()
+        try:
+            with open('Hangman_wordbank.csv') as csv_file:
+                self.wordlist = csv.reader(csv_file, delimiter=',').__next__()
+        except FileNotFoundError:
+            print('Error opening file!')
+            raise FileNotFoundError
         self.answer = ''
         self.game_status = ''
         self.misses_remaining = 6
@@ -27,7 +38,6 @@ class Hangman:
         # check if letter has been guessed
         for letter in self.guessed_letters:
             if guess == letter:
-                print("You've already chosen this letter!")
                 return 'chosen'
         self.guessed_letters.append(guess)
         correct = False
@@ -37,7 +47,6 @@ class Hangman:
                 return 'correct'
                 correct = True
         if not correct:
-            print('incorrect guess')
             self.misses_remaining -= 1
             return 'incorrect'
 
@@ -52,19 +61,7 @@ class Hangman:
             final_answer = final_answer.replace(guess, '')
         # if final_answer string is '' then every letter has been guessed
         if final_answer == '':
-            print('You win!')
             self.game_status = 'win'
         if self.misses_remaining == 0:
-            print('Game over!')
             self.game_status = 'lose'
         return self.game_status
-
-
-if __name__ == '__main__':
-    newGame = Hangman()
-    newGame.start_game()
-    newGame.guess_letter('o')
-    newGame.guess_letter('h')
-    newGame.guess_letter('e')
-    newGame.guess_letter('l')
-    pass

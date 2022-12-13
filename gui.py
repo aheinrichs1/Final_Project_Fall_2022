@@ -1,4 +1,8 @@
 """
+Program: gui.py
+Author: Alex Heinrichs
+Date Modified: 12/13/2022
+
 Contains gui for hangman game
 """
 from tkinter import *
