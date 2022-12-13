@@ -74,7 +74,7 @@ def check_game_status(condition):
         message.config(text='Congrats, you win!\nPress start game to play again')
         end_game()
     elif condition == 'lose':
-        message.config(text=f'Congrats, you live to suck another day!\nPress start game to play again')
+        message.config(text=f'HUNG! Game Over\nPress start game to play again')
         answer = ''
         for letter in newGame.answer:
             answer += letter + ' '
